@@ -17,5 +17,5 @@ export default function Timer({ duration, onEnd, stopped }) {
 		return () => clearTimeout(t);
 	}, [time, stopped]);
 
-	return <div className="mb-3 text-sm text-gray-600">⏱ {time} сек</div>;
+	return <div className="mb-3 text-xl text-gray-600">⏱ {time} сек</div>;
 }

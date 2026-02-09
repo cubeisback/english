@@ -51,19 +51,19 @@ export default function Page() {
 	// --- Рендер ---
 	if (phase === "start") {
 		return (
-			<div className="min-h-screen flex flex-col items-center justify-center relative">
+			<div className="min-h-screen flex flex-col items-center justify-center relative bg-sky-100">
 				<button
 					onClick={startGame}
-					className="px-6 py-3 bg-black text-white rounded-xl mb-6"
+					className="px-12 cursor-pointer py-3 bg-green-700 text-white rounded-2xl transition-all duration-300 hover:bg-green-600"
 				>
-					Начать игру
+					Start
 				</button>
 
 				<button
 					onClick={() => setSettingsOpen(!settingsOpen)}
-					className="bg-gray-800 text-white px-4 py-2 rounded-full shadow-lg absolute bottom-10 right-10"
+					className="bg-gray-950 cursor-pointer text-white px-4 py-2 rounded-full shadow-lg absolute bottom-10 right-10"
 				>
-					⚙️ Настройки
+					⚙️ Settings
 				</button>
 
 				{settingsOpen && (
@@ -79,7 +79,7 @@ export default function Page() {
 
 	if (phase === "roundIntro") {
 		return (
-			<div className="min-h-screen flex items-center justify-center text-3xl font-bold">
+			<div className="min-h-screen flex items-center justify-center text-5xl font-bold bg-sky-100">
 				Round {tourIndex + 1}
 			</div>
 		);
@@ -99,8 +99,8 @@ export default function Page() {
 
 	if (phase === "finished") {
 		return (
-			<div className="min-h-screen flex items-center justify-center text-3xl font-bold">
-				Викторина завершена 🎉
+			<div className="min-h-screen flex items-center justify-center text-3xl font-bold bg-sky-100">
+				Quiz is over 🎉
 			</div>
 		);
 	}

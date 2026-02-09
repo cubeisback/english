@@ -17,35 +17,39 @@ export default function QuizBoard({ tour, onFinish, isLast, settings }) {
 	};
 
 	return (
-		<div className="p-8 max-w-5xl mx-auto">
-			<h1 className="text-3xl font-bold mb-6">{tour.title}</h1>
+		<div className="bg-sky-100 min-h-screen">
+			<div className="p-8 mx-auto ">
+				<h1 className="text-5xl text-center font-bold mb-12">
+					{tour.title}
+				</h1>
 
-			<div className="grid grid-cols-4 gap-4">
-				{tour.questions.map((q) => (
-					<button
-						key={q.id}
-						onClick={() =>
-							!answeredIds.includes(q.id) && setActive(q)
-						}
-						disabled={answeredIds.includes(q.id)}
-						className={`p-4 rounded-xl border text-center transition-all duration-300
-${answeredIds.includes(q.id) ? "bg-gray-300 text-gray-600 line-through cursor-not-allowed" : "hover:bg-gray-100 scale-105"}
+				<div className="grid grid-cols-4 gap-4">
+					{tour.questions.map((q) => (
+						<button
+							key={q.id}
+							onClick={() =>
+								!answeredIds.includes(q.id) && setActive(q)
+							}
+							disabled={answeredIds.includes(q.id)}
+							className={`p-4 rounded-xl border text-center transition-all duration-300
+${answeredIds.includes(q.id) ? "bg-gray-300 text-gray-600 line-through cursor-not-allowed" : "cursor-pointer"}
 `}
-					>
-						Вопрос {q.id}
-					</button>
-				))}
-			</div>
+						>
+							Question {q.id}
+						</button>
+					))}
+				</div>
 
-			{active && (
-				<QuestionModal
-					question={active}
-					onClose={() => setActive(null)}
-					onAnswered={() => markAnswered(active.id)}
-					questionTime={settings.questionTime}
-					modalCloseTime={settings.modalCloseTime}
-				/>
-			)}
+				{active && (
+					<QuestionModal
+						question={active}
+						onClose={() => setActive(null)}
+						onAnswered={() => markAnswered(active.id)}
+						questionTime={settings.questionTime}
+						modalCloseTime={settings.modalCloseTime}
+					/>
+				)}
+			</div>
 		</div>
 	);
 }

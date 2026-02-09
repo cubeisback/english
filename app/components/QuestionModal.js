@@ -46,7 +46,7 @@ export default function QuestionModal({
 								key={i}
 								disabled={selected !== null}
 								onClick={() => handleAnswer(i)}
-								className={`w-full p-3 rounded-lg border transition-all duration-300
+								className={`w-full p-3 cursor-pointer rounded-lg border transition-all duration-300
                   ${showResult && isCorrect ? "bg-green-200" : ""}
                   ${showResult && isWrong ? "bg-red-200" : ""}
                   hover:scale-105
