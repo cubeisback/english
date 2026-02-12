@@ -1,7 +1,7 @@
 export const tours = [
 	{
 		id: 1,
-		title: "Inventers",
+		title: "Inventors",
 		questions: [
 			{
 				id: 1,
@@ -134,12 +134,6 @@ export const tours = [
 			},
 			{
 				id: 20,
-				question: "Who invented the vaccines against cholera?",
-				answers: ["Louis Pasteur", "John Logie Baird", "Marie Curie"],
-				correct: 0,
-			},
-			{
-				id: 21,
 				question: "What country did Nicolas Copernic come from?",
 				answers: ["Italy", "Poland", "Greece"],
 				correct: 1,
@@ -277,6 +271,37 @@ export const tours = [
 				answers: ["Orville Wright", "Sergei Korolyev", "Karl Benz"],
 				correct: 1,
 			},
+		],
+	},
+	{
+		id: 4,
+		title: "Which Was Earlier?",
+		type: "timeline",
+		items: [
+			[
+				{
+					id: 1,
+					title: "Telephone",
+					year: 1876,
+				},
+				{
+					id: 2,
+					title: "Radio",
+					year: 1895,
+				},
+			],
+			[
+				{
+					id: 3,
+					title: "Airplane",
+					year: 1903,
+				},
+				{
+					id: 4,
+					title: "Television",
+					year: 1927,
+				},
+			],
 		],
 	},
 ];

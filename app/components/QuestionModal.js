@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Timer from "./Timer";
 
 export default function QuestionModal({
@@ -11,32 +11,42 @@ export default function QuestionModal({
 	modalCloseTime,
 }) {
 	const [selected, setSelected] = useState(null);
-	const [showResult, setShowResult] = useState(false);
+	const [correctSelected, setCorrectSelected] = useState(false);
 
 	const handleAnswer = (i) => {
-		if (selected !== null) return;
-		setSelected(i);
-		setShowResult(true); // подсветка
-		setTimeout(() => {
-			onAnswered();
-			onClose();
-		}, modalCloseTime); // ждем указанное время
+		if (correctSelected) return;
+
+		if (i === question.correct) {
+			setSelected(i);
+			setCorrectSelected(true);
+
+			setTimeout(() => {
+				onAnswered();
+				onClose();
+			}, modalCloseTime);
+		} else {
+			// ❌ неправильный ответ — просто подсветить
+			setSelected(i);
+
+			// убрать подсветку через 1 секунду
+			setTimeout(() => {
+				setSelected(null);
+			}, 1000);
+		}
 	};
 
 	return (
 		<div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-			<div className="bg-white p-6 rounded-xl w-full max-w-md shadow-xl animate-fadeIn">
+			<div className="bg-white p-8 rounded-2xl w-full max-w-2xl shadow-2xl">
 				<Timer
-					duration={questionTime / 1000} // секунды
-					onEnd={() => {
-						if (selected === null) handleAnswer(null);
-					}}
-					stopped={selected !== null}
+					duration={questionTime / 1000}
+					onEnd={() => {}}
+					stopped={correctSelected}
 				/>
 
-				<h2 className="text-xl font-bold mb-4">{question.question}</h2>
+				<h2 className="text-2xl font-bold mb-6">{question.question}</h2>
 
-				<div className="space-y-2">
+				<div className="space-y-3">
 					{question.answers.map((a, i) => {
 						const isCorrect = i === question.correct;
 						const isWrong = selected === i && !isCorrect;
@@ -44,13 +54,11 @@ export default function QuestionModal({
 						return (
 							<button
 								key={i}
-								disabled={selected !== null}
 								onClick={() => handleAnswer(i)}
-								className={`w-full p-3 cursor-pointer rounded-lg border transition-all duration-300
-                  ${showResult && isCorrect ? "bg-green-200" : ""}
-                  ${showResult && isWrong ? "bg-red-200" : ""}
-                  hover:scale-105
-                `}
+								className={`w-full p-3 rounded-lg border transition-all duration-300 cursor-pointer
+									${correctSelected && isCorrect ? "bg-green-300" : ""}
+									${isWrong ? "bg-red-300" : ""}
+								`}
 							>
 								{a}
 							</button>
