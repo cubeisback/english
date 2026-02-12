@@ -28,8 +28,10 @@ export default function Page() {
 	const [settings, setSettings] = useState(defaultSettings);
 	const [teams, setTeams] = useState([]);
 
-	// ================= LOAD SETTINGS =================
+	// Для анимации финального экрана (не зависит от фазы)
+	const [showIndex, setShowIndex] = useState(-1);
 
+	// ================= LOAD SETTINGS =================
 	useEffect(() => {
 		const saved = localStorage.getItem(SETTINGS_KEY);
 		const merged = saved
@@ -48,7 +50,6 @@ export default function Page() {
 	}, []);
 
 	// ================= SETTINGS CHANGE =================
-
 	const handleSettingsChange = (newSettings) => {
 		setSettings(newSettings);
 		localStorage.setItem(SETTINGS_KEY, JSON.stringify(newSettings));
@@ -73,7 +74,6 @@ export default function Page() {
 	};
 
 	// ================= SCORE =================
-
 	const getRoundPoints = () => {
 		if (tourIndex === 2) return 3;
 		if (tourIndex === 3) return 5;
@@ -99,7 +99,6 @@ export default function Page() {
 	};
 
 	// ================= GAME FLOW =================
-
 	const startGame = () => {
 		setTourIndex(0);
 		setPhase("roundIntro");
@@ -115,7 +114,6 @@ export default function Page() {
 	};
 
 	// ================= ROUND INTRO TIMER =================
-
 	useEffect(() => {
 		if (phase === "roundIntro") {
 			const timer = setTimeout(() => {
@@ -125,8 +123,24 @@ export default function Page() {
 		}
 	}, [phase, tourIndex, settings.roundTransitionTime]);
 
-	// ================= START SCREEN =================
+	// ================= FINAL SCREEN ANIMATION =================
+	useEffect(() => {
+		if (phase === "finished") {
+			setShowIndex(-1);
+			let i = 0;
+			const interval = setInterval(() => {
+				if (i < teams.length) {
+					setShowIndex(i);
+					i++;
+				} else {
+					clearInterval(interval);
+				}
+			}, 300);
+			return () => clearInterval(interval);
+		}
+	}, [phase, teams.length]);
 
+	// ================= START SCREEN =================
 	if (phase === "start") {
 		return (
 			<div className="min-h-screen flex items-center justify-center bg-sky-100">
@@ -155,8 +169,7 @@ export default function Page() {
 		);
 	}
 
-	// ================= ROUND INTRO (ВОТ ЭТО ИСПРАВЛЯЕТ БАГ) =================
-
+	// ================= ROUND INTRO =================
 	if (phase === "roundIntro") {
 		return (
 			<div className="min-h-screen flex items-center justify-center bg-sky-100 text-6xl font-bold">
@@ -166,7 +179,6 @@ export default function Page() {
 	}
 
 	// ================= QUESTIONS =================
-
 	if (phase === "questions") {
 		return (
 			<>
@@ -194,38 +206,48 @@ export default function Page() {
 	}
 
 	// ================= FINAL =================
-
 	if (phase === "finished") {
 		const maxScore = Math.max(...teams.map((t) => t.score));
+		const winners = teams.filter((t) => t.score === maxScore);
 
 		return (
 			<div className="min-h-screen flex flex-col items-center justify-center bg-black text-white relative overflow-hidden">
-				<Confetti />
+				{winners.length > 0 && (
+					<Confetti numberOfPieces={300} recycle={false} />
+				)}
 
-				<div className="text-7xl animate-bounce mb-8">🏆</div>
-				<h1 className="text-5xl mb-6">Game Over</h1>
+				<h1 className="text-6xl font-bold mb-8">Game Over</h1>
 
-				{teams.map((t, i) => {
-					const isWinner = t.score === maxScore;
-					return (
-						<div
-							key={i}
-							className={`text-3xl font-bold px-6 py-3 mb-4 rounded-xl transition-all duration-500`}
-							style={{
-								backgroundColor: t.color,
-								opacity: isWinner ? 1 : 0.6,
-								transform: isWinner ? "scale(1.1)" : "scale(1)",
-							}}
-						>
-							{isWinner ? "🏆 " : ""}
-							{t.name} — {t.score} pts
-						</div>
-					);
-				})}
+				<div className="flex flex-col items-center gap-4">
+					{teams.map((t, i) => {
+						const isWinner = t.score === maxScore;
+						const isVisible = i <= showIndex;
+
+						return (
+							<div
+								key={i}
+								className={`text-3xl font-bold px-6 py-3 rounded-xl transition-all duration-700`}
+								style={{
+									backgroundColor: t.color,
+									opacity: isVisible ? 1 : 0,
+									transform: isVisible
+										? isWinner
+											? "scale(1.2)"
+											: "scale(1)"
+										: "scale(0.8)",
+									transitionDelay: `${i * 0.1}s`,
+								}}
+							>
+								{isWinner ? "🏆 " : ""}
+								{t.name} — {t.score} pts
+							</div>
+						);
+					})}
+				</div>
 
 				<button
 					onClick={() => setPhase("start")}
-					className="mt-10 bg-white text-black px-8 py-3 rounded-xl"
+					className="mt-10 bg-white text-black px-8 py-3 rounded-xl hover:scale-105 transition-all"
 				>
 					Play Again
 				</button>

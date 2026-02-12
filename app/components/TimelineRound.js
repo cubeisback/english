@@ -26,12 +26,15 @@ export default function TimelineRound({ tour, onFinish }) {
 	};
 
 	const renderCard = (item) => {
+		let color = "text-black";
 		let border = "border-gray-400";
 
 		if (selected !== null) {
 			if (item.id === correct) {
+				color = "text-green-600";
 				border = "border-green-600";
 			} else if (item.id === selected) {
+				color = "text-red-600";
 				border = "border-red-600";
 			}
 		}
@@ -39,7 +42,7 @@ export default function TimelineRound({ tour, onFinish }) {
 		return (
 			<div
 				onClick={() => handleSelect(item.id)}
-				className={`cursor-pointer border-4 ${border} rounded-2xl p-6 w-80 flex flex-col items-center gap-4 transition-all`}
+				className={`cursor-pointer ${border} border-4 rounded-2xl p-6 w-80 flex flex-col items-center gap-4 transition-all`}
 			>
 				<h2 className="text-2xl font-bold">{item.title}</h2>
 
@@ -48,7 +51,7 @@ export default function TimelineRound({ tour, onFinish }) {
 				</div>
 
 				{selected !== null && (
-					<div className="text-xl font-semibold">
+					<div className={`text-xl font-semibold ${color}`}>
 						Year: {item.year}
 					</div>
 				)}

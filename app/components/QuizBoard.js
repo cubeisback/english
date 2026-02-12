@@ -18,7 +18,7 @@ export default function QuizBoard({ tour, onFinish, isLast, settings }) {
 				{tour.title}
 			</h1>
 
-			<div className="grid grid-cols-4 gap-4 max-w-6xl mx-auto">
+			<div className="grid grid-cols-4 gap-4 max-w-8xl mx-auto">
 				{tour.questions.map((q) => {
 					const answered = answeredIds.includes(q.id);
 
@@ -27,11 +27,11 @@ export default function QuizBoard({ tour, onFinish, isLast, settings }) {
 							key={q.id}
 							onClick={() => !answered && setActive(q)}
 							disabled={answered}
-							className={`p-4 rounded-xl border text-center transition-all duration-300
+							className={`px-4 py-8 border-4 text-center text-xl font-semibold transition-all duration-300
 								${
 									answered
-										? "bg-gray-300 text-gray-600 line-through cursor-not-allowed"
-										: "bg-white hover:scale-105 cursor-pointer"
+										? "bg-gray-400 border-gray-400 text-gray-600 line-through cursor-not-allowed"
+										: "bg-sky-900 border-sky-900 hover:border-yellow-400 text-white cursor-pointer"
 								}
 							`}
 						>

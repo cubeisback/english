@@ -281,25 +281,133 @@ export const tours = [
 			[
 				{
 					id: 1,
-					title: "Telephone",
-					year: 1876,
+					title: "Photocopier",
+					year: 1903,
 				},
 				{
 					id: 2,
-					title: "Radio",
-					year: 1895,
+					title: "The first electric cell",
+					year: 1800,
 				},
 			],
 			[
 				{
 					id: 3,
-					title: "Airplane",
-					year: 1903,
+					title: "Kodak camera",
+					year: 1888,
 				},
 				{
 					id: 4,
-					title: "Television",
-					year: 1927,
+					title: "Laser",
+					year: 1960,
+				},
+			],
+			[
+				{
+					id: 5,
+					title: "Telegraph",
+					year: 1837,
+				},
+				{
+					id: 6,
+					title: "Telescope",
+					year: 1608,
+				},
+			],
+			[
+				{
+					id: 7,
+					title: "Tyres",
+					year: 1888,
+				},
+				{
+					id: 8,
+					title: "Typewriter",
+					year: 1868,
+				},
+			],
+			[
+				{
+					id: 9,
+					title: "Lego bricks",
+					year: 1955,
+				},
+				{
+					id: 10,
+					title: "Trainers",
+					year: 1980,
+				},
+			],
+			[
+				{
+					id: 11,
+					title: "Frozen food",
+					year: 1914,
+				},
+				{
+					id: 12,
+					title: "Canned food",
+					year: 1869,
+				},
+			],
+			[
+				{
+					id: 13,
+					title: "Steam engine",
+					year: 1765,
+				},
+				{
+					id: 14,
+					title: "Diesel engine",
+					year: 1892,
+				},
+			],
+			[
+				{
+					id: 15,
+					title: "Digital stereo sound system",
+					year: 1990,
+				},
+				{
+					id: 16,
+					title: "Video cassette tape recorder",
+					year: 1975,
+				},
+			],
+			[
+				{
+					id: 17,
+					title: "Match",
+					year: 1827,
+				},
+				{
+					id: 18,
+					title: "Dynamite",
+					year: 1867,
+				},
+			],
+			[
+				{
+					id: 19,
+					title: "Hamburger",
+					year: 1954,
+				},
+				{
+					id: 20,
+					title: "Instant coffee",
+					year: 1937,
+				},
+			],
+			[
+				{
+					id: 21,
+					title: "Colour TV",
+					year: 1928,
+				},
+				{
+					id: 22,
+					title: "Helicopter",
+					year: 1939,
 				},
 			],
 		],
