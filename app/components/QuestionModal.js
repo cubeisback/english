@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Timer from "./Timer";
 
 export default function QuestionModal({
@@ -8,25 +8,43 @@ export default function QuestionModal({
 	onClose,
 	onAnswered,
 	questionTime,
-	modalCloseTime,
 }) {
 	const [selected, setSelected] = useState(null);
 	const [correctSelected, setCorrectSelected] = useState(false);
 
+	// 🔊 ссылки на аудио
+	const correctSound = useRef(null);
+	const wrongSound = useRef(null);
+
 	const handleAnswer = (i) => {
 		if (correctSelected) return;
 
-		if (i === question.correct) {
+		const isCorrect = i === question.correct;
+
+		if (isCorrect) {
 			setSelected(i);
 			setCorrectSelected(true);
+
+			// 🔊 проигрываем звук правильного ответа
+			if (correctSound.current) {
+				correctSound.current.currentTime = 0;
+				correctSound.current.volume = 0.1;
+				correctSound.current.play();
+			}
 
 			setTimeout(() => {
 				onAnswered();
 				onClose();
-			}, modalCloseTime);
+			}, 2000);
 		} else {
-			// ❌ неправильный ответ — просто подсветить
 			setSelected(i);
+
+			// 🔊 проигрываем звук неправильного ответа
+			if (wrongSound.current) {
+				wrongSound.current.currentTime = 0;
+				wrongSound.current.volume = 0.1;
+				wrongSound.current.play();
+			}
 
 			// убрать подсветку через 1 секунду
 			setTimeout(() => {
@@ -37,7 +55,7 @@ export default function QuestionModal({
 
 	return (
 		<div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-			<div className="bg-white p-8 rounded-2xl w-full max-w-6xl shadow-2xl">
+			<div className="bg-white p-8 rounded-xl w-full max-w-6xl shadow-2xl">
 				<Timer
 					duration={questionTime / 1000}
 					onEnd={() => {}}
@@ -57,16 +75,29 @@ export default function QuestionModal({
 							<button
 								key={i}
 								onClick={() => handleAnswer(i)}
-								className={`p-4 rounded-lg border text-2xl transition-all duration-300 cursor-pointer text-center
-					${correctSelected && isCorrect ? "bg-green-300" : ""}
-					${isWrong ? "bg-red-300" : ""}
-				`}
+								className={`px-4 py-8 rounded-xl border-2 text-2xl font-semibold transition-all duration-300 cursor-pointer text-center
+		${!correctSelected && selected === null ? "hover:bg-sky-400" : ""}
+		${correctSelected && isCorrect ? "bg-green-500" : ""}
+		${isWrong ? "bg-red-500" : ""}
+	`}
 							>
 								{a}
 							</button>
 						);
 					})}
 				</div>
+
+				{/* 🔊 Аудио элементы */}
+				<audio
+					ref={correctSound}
+					src="/sounds/correct.mp3"
+					preload="auto"
+				/>
+				<audio
+					ref={wrongSound}
+					src="/sounds/wrong.mp3"
+					preload="auto"
+				/>
 			</div>
 		</div>
 	);

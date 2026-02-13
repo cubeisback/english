@@ -41,7 +41,7 @@ export default function SettingsPanel({ settings, onChange, onClose }) {
 				<h4 className="font-semibold">Команды</h4>
 
 				{["team1", "team2", "team3"].map((teamKey, i) => (
-					<div key={teamKey} className="border p-2 rounded-lg">
+					<div key={teamKey} className="border p-2 rounded-xl flex">
 						<label className="flex flex-col">
 							Название:
 							<input
@@ -53,11 +53,11 @@ export default function SettingsPanel({ settings, onChange, onClose }) {
 										[teamKey]: e.target.value,
 									})
 								}
-								className="border rounded p-1 mt-1"
+								className="border rounded p-1"
 							/>
 						</label>
 
-						<label className="flex flex-col mt-2">
+						<label className="flex flex-col">
 							Цвет:
 							<input
 								type="color"
@@ -73,6 +73,55 @@ export default function SettingsPanel({ settings, onChange, onClose }) {
 						</label>
 					</div>
 				))}
+
+				<hr />
+
+				<h4 className="font-semibold">Оформление</h4>
+
+				<label className="flex flex-col">
+					Цвет фона:
+					<input
+						type="color"
+						value={settings.backgroundColor}
+						onChange={(e) =>
+							onChange({
+								...settings,
+								backgroundColor: e.target.value,
+							})
+						}
+						className="mt-1 h-8"
+					/>
+				</label>
+
+				<label className="flex flex-col">
+					Цвет кнопки вопроса:
+					<input
+						type="color"
+						value={settings.questionButtonColor}
+						onChange={(e) =>
+							onChange({
+								...settings,
+								questionButtonColor: e.target.value,
+							})
+						}
+						className="mt-1 h-8"
+					/>
+				</label>
+
+				<label className="flex flex-col">
+					Цвет рамки кнопки вопроса:
+					<input
+						type="color"
+						value={settings.questionButtonBorderColor}
+						onChange={(e) =>
+							onChange({
+								...settings,
+								questionButtonBorderColor: e.target.value,
+							})
+						}
+						className="mt-1 h-8"
+					/>
+				</label>
 			</div>
 
 			<button

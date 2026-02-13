@@ -16,14 +16,25 @@ export default function Page() {
 
 	const defaultSettings = {
 		questionTime: 60000,
-		roundTransitionTime: 2000,
+		roundTransitionTime: 5000,
 		team1: "Team 1",
 		team2: "Team 2",
 		team3: "Team 3",
 		team1Color: "#ef4444",
 		team2Color: "#3b82f6",
 		team3Color: "#22c55e",
+
+		backgroundColor: "#e0f2fe", // sky-100
+		questionButtonColor: "#00598a",
+		questionButtonBorderColor: "#fdc700",
 	};
+
+	const roundImages = [
+		"/images/round1.jpg",
+		"/images/round2.jpg",
+		"/images/round3.jpg",
+		"/images/round4.jpg",
+	];
 
 	const [settings, setSettings] = useState(defaultSettings);
 	const [teams, setTeams] = useState([]);
@@ -143,12 +154,12 @@ export default function Page() {
 	// ================= START SCREEN =================
 	if (phase === "start") {
 		return (
-			<div className="min-h-screen flex items-center justify-center bg-sky-100">
+			<div className="min-h-screen flex items-center justify-center bg-[url(/images/start.jpg)] bg-cover bg-center relative">
 				<div
 					onClick={startGame}
-					className="text-6xl cursor-pointer text-green-700"
+					className="text-6xl font-bold cursor-pointer text-white text-shadow-lg/30"
 				>
-					Start Game
+					Start
 				</div>
 
 				<button
@@ -172,8 +183,15 @@ export default function Page() {
 	// ================= ROUND INTRO =================
 	if (phase === "roundIntro") {
 		return (
-			<div className="min-h-screen flex items-center justify-center bg-sky-100 text-6xl font-bold">
-				Round {tourIndex + 1}
+			<div
+				className="min-h-screen flex items-center justify-center bg-cover bg-center relative"
+				style={{
+					backgroundImage: `url(${roundImages[tourIndex]})`,
+				}}
+			>
+				{/* <h1 className="relative text-6xl font-bold text-white drop-shadow-2xl">
+					Round {tourIndex + 1}
+				</h1> */}
 			</div>
 		);
 	}
@@ -213,7 +231,7 @@ export default function Page() {
 		return (
 			<div className="min-h-screen flex flex-col items-center justify-center bg-black text-white relative overflow-hidden">
 				{winners.length > 0 && (
-					<Confetti numberOfPieces={300} recycle={false} />
+					<Confetti numberOfPieces={300} recycle={true} />
 				)}
 
 				<h1 className="text-6xl font-bold mb-8">Game Over</h1>

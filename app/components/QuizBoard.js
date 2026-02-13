@@ -13,7 +13,10 @@ export default function QuizBoard({ tour, onFinish, isLast, settings }) {
 	};
 
 	return (
-		<div className="bg-sky-100 min-h-screen p-8">
+		<div
+			className="min-h-screen p-8"
+			style={{ backgroundColor: settings.backgroundColor }}
+		>
 			<h1 className="text-5xl text-center font-bold mb-12">
 				{tour.title}
 			</h1>
@@ -27,13 +30,33 @@ export default function QuizBoard({ tour, onFinish, isLast, settings }) {
 							key={q.id}
 							onClick={() => !answered && setActive(q)}
 							disabled={answered}
-							className={`px-4 py-8 border-4 text-center text-xl font-semibold transition-all duration-300
-								${
-									answered
-										? "bg-gray-400 border-gray-400 text-gray-600 line-through cursor-not-allowed"
-										: "bg-sky-900 border-sky-900 hover:border-yellow-400 text-white cursor-pointer"
-								}
-							`}
+							className={`px-4 py-8 border-4 text-center text-xl font-semibold transition-all duration-300 ${
+								answered
+									? "line-through cursor-not-allowed text-gray-600"
+									: "cursor-pointer"
+							}`}
+							style={{
+								backgroundColor: answered
+									? "#9CA3AF"
+									: settings.questionButtonColor,
+								borderColor: answered
+									? "#9CA3AF"
+									: settings.questionButtonColor, // сначала одинаково с фоном
+								color: answered
+									? "#666"
+									: settings.questionButtonTextColor ||
+										"#fff",
+							}}
+							onMouseEnter={(e) => {
+								if (!answered)
+									e.currentTarget.style.borderColor =
+										settings.questionButtonBorderColor;
+							}}
+							onMouseLeave={(e) => {
+								if (!answered)
+									e.currentTarget.style.borderColor =
+										settings.questionButtonColor;
+							}}
 						>
 							Question {q.id}
 						</button>
@@ -56,7 +79,6 @@ export default function QuizBoard({ tour, onFinish, isLast, settings }) {
 					onClose={() => setActive(null)}
 					onAnswered={() => markAnswered(active.id)}
 					questionTime={settings.questionTime}
-					modalCloseTime={settings.modalCloseTime}
 				/>
 			)}
 		</div>
