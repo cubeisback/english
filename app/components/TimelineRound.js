@@ -72,8 +72,12 @@ export default function TimelineRound({ tour, onFinish }) {
 			>
 				<h2 className="text-2xl font-bold text-center">{item.title}</h2>
 
-				<div className="w-60 h-60 bg-gray-300 flex items-center justify-center rounded-xl">
-					Image
+				<div className="w-60 h-60 flex items-center justify-center rounded-xl overflow-hidden">
+					<img
+						src={item.image}
+						alt={item.title}
+						className="mix-blend-multiply"
+					/>
 				</div>
 
 				{selected !== null && (

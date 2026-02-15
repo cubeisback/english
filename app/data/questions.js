@@ -282,11 +282,13 @@ export const tours = [
 				{
 					id: 1,
 					title: "Photocopier",
+					image: "./images/1.png",
 					year: 1903,
 				},
 				{
 					id: 2,
 					title: "The first electric cell",
+					image: "./images/2.webp",
 					year: 1800,
 				},
 			],
@@ -294,11 +296,13 @@ export const tours = [
 				{
 					id: 3,
 					title: "Kodak camera",
+					image: "./images/3.webp",
 					year: 1888,
 				},
 				{
 					id: 4,
 					title: "Laser",
+					image: "./images/4.jpg",
 					year: 1960,
 				},
 			],
@@ -306,11 +310,13 @@ export const tours = [
 				{
 					id: 5,
 					title: "Telegraph",
+					image: "./images/5.webp",
 					year: 1837,
 				},
 				{
 					id: 6,
 					title: "Telescope",
+					image: "./images/6.webp",
 					year: 1608,
 				},
 			],
@@ -318,11 +324,13 @@ export const tours = [
 				{
 					id: 7,
 					title: "Tyres",
+					image: "./images/7.webp",
 					year: 1888,
 				},
 				{
 					id: 8,
 					title: "Typewriter",
+					image: "./images/8.jpg",
 					year: 1868,
 				},
 			],
@@ -330,23 +338,27 @@ export const tours = [
 				{
 					id: 9,
 					title: "Lego bricks",
+					image: "./images/9.jpg",
 					year: 1955,
 				},
 				{
 					id: 10,
 					title: "Trainers",
-					year: 1980,
+					image: "./images/10.webp",
+					year: 1895,
 				},
 			],
 			[
 				{
 					id: 11,
 					title: "Frozen food",
+					image: "./images/11.jpg",
 					year: 1914,
 				},
 				{
 					id: 12,
 					title: "Canned food",
+					image: "./images/12.webp",
 					year: 1869,
 				},
 			],
@@ -354,11 +366,13 @@ export const tours = [
 				{
 					id: 13,
 					title: "Steam engine",
+					image: "./images/13.jpg",
 					year: 1765,
 				},
 				{
 					id: 14,
 					title: "Diesel engine",
+					image: "./images/14.jpg",
 					year: 1892,
 				},
 			],
@@ -366,11 +380,13 @@ export const tours = [
 				{
 					id: 15,
 					title: "Digital stereo sound system",
+					image: "./images/15.jpg",
 					year: 1990,
 				},
 				{
 					id: 16,
 					title: "Video cassette tape recorder",
+					image: "./images/16.jpg",
 					year: 1975,
 				},
 			],
@@ -378,11 +394,13 @@ export const tours = [
 				{
 					id: 17,
 					title: "Match",
+					image: "./images/17.webp",
 					year: 1827,
 				},
 				{
 					id: 18,
 					title: "Dynamite",
+					image: "./images/18.jpg",
 					year: 1867,
 				},
 			],
@@ -390,11 +408,13 @@ export const tours = [
 				{
 					id: 19,
 					title: "Hamburger",
+					image: "./images/19.webp",
 					year: 1954,
 				},
 				{
 					id: 20,
 					title: "Instant coffee",
+					image: "./images/20.webp",
 					year: 1937,
 				},
 			],
@@ -402,11 +422,13 @@ export const tours = [
 				{
 					id: 21,
 					title: "Colour TV",
+					image: "./images/21.webp",
 					year: 1928,
 				},
 				{
 					id: 22,
 					title: "Helicopter",
+					image: "./images/22.webp",
 					year: 1939,
 				},
 			],
